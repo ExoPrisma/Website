@@ -1,3 +1,7 @@
+const utils = require("./utils");
+const assertions = require("./assertion");
+const node = require("./node");
+
 let canvas = document.querySelector('.field');
 let ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
@@ -56,3 +60,7 @@ canvas.addEventListener("mousemove", e => {
 });
 
 draw(); // on page load
+
+var node = ON;
+
+console.log(node);

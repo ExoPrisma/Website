@@ -14,6 +14,23 @@ function assertCondition(condition, message, errorValue) {
     throw new Error(message + "\nError value :" + errorValue || 
                     message ||
                     "Error value :" + errorValue ||
-                    "Assertion failed");
+                    "Condition unmet");
   }
+}
+/**
+ * Assert equality (type & value)
+ *  - If not fulfilled, throws Error with appropriate message 
+ * @param {*} expectedValue expected value
+ * @param {*} actualValue actual value
+ * @param {string} message message to be displayed if condition failed
+ */
+function assertEqual(expectedValue, actualValue, message) {
+  if(expectedValue !== actualValue) {
+    throw new Error(message || "Not equal");
+  }
+}
+
+module.exports = {
+  assertCondition, 
+  assertEqual,
 }
