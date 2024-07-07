@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "lru-cache": "^10.3.1",
+    "murmurhash": "^2.0.1"
+  }
+}
