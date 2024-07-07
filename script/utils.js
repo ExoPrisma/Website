@@ -4,7 +4,7 @@
 
 const { assertCondition } = require("./assertion");
 
-/**
+/** 
  * Checks if number is an integer > 0 & is a power of two
  * 
  * @param {number} num 
@@ -17,7 +17,7 @@ function isBaseTwo(num) {
   return (num & (num - 1)) === 0;
 }
 
-/**
+/** 
  * Creates 2D array.
  * 1 arguments -> Width = Height = Parameter
  * 2 arguments -> Parameter 1 => Width,
@@ -49,7 +49,7 @@ function create2DArray(...size){
 
     return grid;
   } else {
-    throw new Error("Failed to create 2D array, too many arguments: " + args.length);
+    throw new Error("Failed to create 2D array, too many arguments: " + size.length);
   }
 }
 

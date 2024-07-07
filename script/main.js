@@ -1,66 +1,72 @@
 const utils = require("./utils");
 const assertions = require("./assertion");
-const node = require("./node");
+const {Node, ON, OFF} = require("./node");
 
-let canvas = document.querySelector('.field');
-let ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+// Place holder canvas
+// let canvas = document.querySelector('.field');
+// let ctx = canvas.getContext('2d');
+// canvas.width = window.innerWidth;
+// canvas.height = window.innerHeight;
 
-function draw() {
-    let step = 10;
-    let left = 0.5 - Math.ceil(canvas.width / step) * step;
-    let top = 0.5 - Math.ceil(canvas.height / step) * step;
-    let right = 2*canvas.width;
-    let bottom = 2*canvas.height;
-    ctx.clearRect(left, top, right - left, bottom - top);
-    ctx.beginPath();
-    for (let x = left; x < right; x += step) {
-        ctx.moveTo(x, top);
-        ctx.lineTo(x, bottom);
-    }
-    for (let y = top; y < bottom; y += step) {
-        ctx.moveTo(left, y);
-        ctx.lineTo(right, y);
-    }
-    ctx.strokeStyle = "#888";
-    ctx.stroke();
-}
+// function draw() {
+//     let step = 10;
+//     let left = 0.5 - Math.ceil(canvas.width / step) * step;
+//     let top = 0.5 - Math.ceil(canvas.height / step) * step;
+//     let right = 2*canvas.width;
+//     let bottom = 2*canvas.height;
+//     ctx.clearRect(left, top, right - left, bottom - top);
+//     ctx.beginPath();
+//     for (let x = left; x < right; x += step) {
+//         ctx.moveTo(x, top);
+//         ctx.lineTo(x, bottom);
+//     }
+//     for (let y = top; y < bottom; y += step) {
+//         ctx.moveTo(left, y);
+//         ctx.lineTo(right, y);
+//     }
+//     ctx.strokeStyle = "#888";
+//     ctx.stroke();
+// }
 
 
-// Mouse event handling:
-let start;
-const getPos = (e) => ({
-    x: e.clientX - canvas.offsetLeft,
-    y: e.clientY - canvas.offsetTop 
-});
+// // Mouse event handling:
+// let start;
+// const getPos = (e) => ({
+//     x: e.clientX - canvas.offsetLeft,
+//     y: e.clientY - canvas.offsetTop 
+// });
 
-const reset = () => {
-    start = null;
-    ctx.setTransform(1, 0, 0, 1, 0, 0); // reset translation
-    draw();
-}
+// const reset = () => {
+//     start = null;
+//     ctx.setTransform(1, 0, 0, 1, 0, 0); // reset translation
+//     draw();
+// }
 
-canvas.addEventListener("mousedown", e => {
-    reset();
-    start = getPos(e)
-});
+// canvas.addEventListener("mousedown", e => {
+//     reset();
+//     start = getPos(e)
+// });
 
-canvas.addEventListener("mouseup", reset);
-canvas.addEventListener("mouseleave", reset);
+// canvas.addEventListener("mouseup", reset);
+// canvas.addEventListener("mouseleave", reset);
 
-canvas.addEventListener("mousemove", e => {
-    // Only move the grid when we registered a mousedown event
-    if (!start) return;
-    let pos = getPos(e);
-    // Move coordinate system in the same way as the cursor
-    ctx.translate(pos.x - start.x, pos.y - start.y);
-    draw();
-    start = pos;
-});
+// canvas.addEventListener("mousemove", e => {
+//     // Only move the grid when we registered a mousedown event
+//     if (!start) return;
+//     let pos = getPos(e);
+//     // Move coordinate system in the same way as the cursor
+//     ctx.translate(pos.x - start.x, pos.y - start.y);
+//     draw();
+//     start = pos;
+// });
 
-draw(); // on page load
+// draw(); // on page load
 
-var node = ON;
-
-console.log(node);
+var aNode = new Node(1, [ON, OFF, ON, ON], 3, "XOXX");
+var bigNode = new Node(2, [aNode, aNode, aNode, aNode], 12, "XOXXXOXXXOXXXOXX")
+var bbNode = new Node(3, [bigNode, bigNode, bigNode, bigNode], 48, "XOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXX")
+var cNode = new Node(4, [bbNode, bbNode, bbNode, bbNode], 192, "XOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXX");
+var dNode = new Node(5, [cNode, cNode, cNode, cNode], 768, "smt")
+bigNode.toGrid();
+Node.join(aNode, aNode, aNode, aNode).toGrid();
+Node.get_zero(0).toGrid();

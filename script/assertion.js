@@ -2,7 +2,7 @@
  * Javascript that handles assertions 
  */
 
-/**
+/** 
  * Assert a condition 
  *  - If not fulfilled, throws Error with appropriate message
  * @param {boolean} condition condition to be fulfilled
@@ -17,7 +17,8 @@ function assertCondition(condition, message, errorValue) {
                     "Condition unmet");
   }
 }
-/**
+
+/** 
  * Assert equality (type & value)
  *  - If not fulfilled, throws Error with appropriate message 
  * @param {*} expectedValue expected value
