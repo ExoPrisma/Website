@@ -215,17 +215,17 @@ class Node {
    * @param {number} lvl of the empty node
    * @returns empty node
    */
-  static get_zero(lvl){
+  static getZero(lvl){
     const cacheKey = `${lvl}`;
     
     if (Node.#cacheEmpty.has(cacheKey)) {
       return Node.#cacheEmpty.get(cacheKey);
     }
 
-    const kZeroNode = lvl == 0 ? OFF : Node.join(Node.get_zero(lvl - 1), 
-                                                 Node.get_zero(lvl - 1), 
-                                                 Node.get_zero(lvl - 1), 
-                                                 Node.get_zero(lvl - 1));
+    const kZeroNode = lvl == 0 ? OFF : Node.join(Node.getZero(lvl - 1), 
+                                                 Node.getZero(lvl - 1), 
+                                                 Node.getZero(lvl - 1), 
+                                                 Node.getZero(lvl - 1));
 
     Node.#cacheEmpty.set(cacheKey, kZeroNode);
       return kZeroNode;
@@ -246,7 +246,7 @@ class Node {
    * @returns new node with node in the middle
    */
   static centre(node){
-    const emptyNode = Node.get_zero(node.#lvl - 1);
+    const emptyNode = Node.getZero(node.#lvl - 1);
     const centerNode = join(
       join(emptyNode, emptyNode, emptyNode, node.#children[0]), 
       join(emptyNode, emptyNode, node.#children[1], emptyNode),

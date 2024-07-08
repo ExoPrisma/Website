@@ -69,4 +69,4 @@ var cNode = new Node(4, [bbNode, bbNode, bbNode, bbNode], 192, "XOXXXOXXXOXXXOXX
 var dNode = new Node(5, [cNode, cNode, cNode, cNode], 768, "smt")
 bigNode.toGrid();
 Node.join(aNode, aNode, aNode, aNode).toGrid();
-Node.get_zero(0).toGrid();
+Node.getZero(0).toGrid();
