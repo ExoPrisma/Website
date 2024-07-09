@@ -1,0 +1,14 @@
+{
+  "author": "Shushi Michael Huang",
+  "type": "module",
+  "name": "Website",
+  "version": "1.0.0",
+  "main": "/public/script/script.js",
+  "dependencies": {
+    "lru-cache": "^10.3.1",
+    "murmurhash": "^2.0.1"
+  },
+  "scripts": {
+    "start": "node /public/script/script.js"
+  }
+}

@@ -1,8 +1,8 @@
-const { LRUCache } = require('lru-cache')
-const murmurhash = require('murmurhash');
+import { LRUCache } from './node_modules/lru-cache/src';
+import { v3 } from 'murmurhash';
 
-const utils = require("./utils");
-const { assertCondition, assertEqual } = require("./assertion");
+import { create2DArray } from "../utils/utils";
+import { assertCondition } from "../utils/assertion";
 /**
  * Node class used for quadtree
  * 
@@ -87,7 +87,7 @@ class Node {
     }
     else {
       const size = Math.pow(2, this.#lvl)
-      const grid = utils.create2DArray(size);
+      const grid = create2DArray(size);
 
       for (let i = 0; i < 4; i++) {
         let xRange = (i % 2 === 0) ? [0, size / 2 - 1] : [size / 2, size - 1];
@@ -205,7 +205,7 @@ class Node {
    */
   static #computeHash(nwChild, neChild, swChild, seChild){
     const combined = `${nwChild.#lvl}${nwChild.#hash}${neChild.#hash}${swChild.#hash}${seChild.#hash}`;
-    const hashValue = murmurhash.v3(combined);
+    const hashValue = v3(combined);
     return BigInt(hashValue) & ((1n << 63n) - 1n);
   }
 
@@ -369,7 +369,7 @@ const ON = new Node(0, new Array(), 1, 1);
 const OFF = new Node(0, new Array(), 0, 0);
 
 
-module.exports = {
+export default {
   Node,
   ON, 
   OFF

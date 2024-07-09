@@ -7,4 +7,4 @@ Resources
   - https://www.drdobbs.com/jvm/an-algorithm-for-compressing-space-and-t/184406478
 
 Bundle.js
-To undate bundle.js, run browserify main.js -o bundle.js
+To update bundle.js, run browserify main.js -o bundle.js
