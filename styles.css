@@ -1,11 +1,15 @@
-html, body {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  overflow:hidden;
+:root {
+  /* Light Color Scheme */
+  --c-background : #fff8eb;
+
+  /* Dark Color Scheme */
+  --c-background : #0C4767;
+
 }
 
-canvas { 
-  background: silver;
+
+
+/* Currently disabled, to be implemented in the future */
+.hashlife {
+  display: none;
 }
