@@ -2,7 +2,7 @@
  * Javascript containing utility functions
  */
 
-const { assertCondition } = require("./assertion");
+import { assertCondition } from "./assertion.js";
 
 /** 
  * Checks if number is an integer > 0 & is a power of two
@@ -53,7 +53,7 @@ function create2DArray(...size){
   }
 }
 
-module.exports = {
-  isBaseTwo,
-  create2DArray,
+export {
+  isBaseTwo, 
+  create2DArray
 }

@@ -1,8 +1,42 @@
-// Place holder canvas
-// let canvas = document.querySelector('.field');
+import Node, { ON, OFF } from "../../src/HashLife/node.js";
+import $ from 'jquery';
+
+$(function() {
+  const canvas = document.getElementById("lifeCanvas");
+  const app = new PIXI.Application({ view: canvas, width: 800, height: 800, backgroundColor: 0xFFFFFF });
+  const graphics = new PIXI.Graphics();
+
+  // Create an instance of your class and get the coordinates
+  var aNode = Node.join(ON, OFF, ON, ON);
+  var bNode = Node.join(aNode, aNode, aNode, aNode);
+  const coordinates = Node.expand(bNode);  // Get the coordinates
+
+
+  // Draw each coordinate on the canvas
+  $.each(coordinates, function(index, coord) {
+      const [x, y] = coord;
+      graphics.beginFill(0x000000);  // Black color
+      graphics.drawRect(x, y, 1, 1);  // Draw a 1x1 pixel square at (x, y)
+      graphics.endFill();
+  });
+
+  app.stage.addChild(graphics);
+});
+
+
+// // Place holder canvas
+// let canvas = document.querySelector(".field");
 // let ctx = canvas.getContext('2d');
 // canvas.width = window.innerWidth;
 // canvas.height = window.innerHeight;
+
+
+// var bigNode = new Node(2, [aNode, aNode, aNode, aNode], 12, "XOXXXOXXXOXXXOXX")
+// var bbNode = new Node(3, [bigNode, bigNode, bigNode, bigNode], 48, "XOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXX")
+// var cNode = new Node(4, [bbNode, bbNode, bbNode, bbNode], 192, "XOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXXXOXX");
+// var dNode = new Node(5, [cNode, cNode, cNode, cNode], 768, "smt")
+// console.log(Node.expand(dNode, 0, 0, [canvas.width, canvas.height], 0));
+
 
 // function draw() {
 //     let step = 10;

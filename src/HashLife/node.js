@@ -1,8 +1,7 @@
-import { LRUCache } from './node_modules/lru-cache/src';
-import { v3 } from 'murmurhash';
+import { LRUCache } from "lru-cache";
 
-import { create2DArray } from "../utils/utils";
-import { assertCondition } from "../utils/assertion";
+import { create2DArray } from "../utils/utils.js";
+import { assertCondition } from "../utils/assertion.js";
 /**
  * Node class used for quadtree
  * 
@@ -182,6 +181,7 @@ class Node {
     const cacheKey = `${nwChild.#hash}-${neChild.#hash}-${swChild.#hash}-${seChild.#hash}`;
 
     if (Node.#cacheNode.has(cacheKey)) {
+      console.log("cache");
       return Node.#cacheNode.get(cacheKey);
     }
 
@@ -204,9 +204,24 @@ class Node {
    * @returns new node has value
    */
   static #computeHash(nwChild, neChild, swChild, seChild){
-    const combined = `${nwChild.#lvl}${nwChild.#hash}${neChild.#hash}${swChild.#hash}${seChild.#hash}`;
-    const hashValue = v3(combined);
-    return BigInt(hashValue) & ((1n << 63n) - 1n);
+    // Ensure all hash values are BigInt
+    const lvl = BigInt(nwChild.#lvl);
+    const hash1 = BigInt(nwChild.#hash);
+    const hash2 = BigInt(neChild.#hash);
+    const hash3 = BigInt(swChild.#hash);
+    const hash4 = BigInt(seChild.#hash);
+
+    // Perform arithmetic operations with BigInt
+    const hash = lvl 
+                + 2n 
+                + (5131830419411n * hash1) 
+                + (3758991985019n * hash2)
+                + (8973110871315n * hash3) 
+                + 4318490180473n 
+                + hash4;
+
+    // Apply bitwise operation using BigInt
+return hash & ((1n << 63n) - 1n);
   }
 
   /**
@@ -362,15 +377,145 @@ class Node {
 
     return (node.#numCells && sumOuterGrid == 2) || sumOuterGrid == 3 ? ON : OFF;
   }
+
+  /**
+   * Find the nth successor of a given node
+   * 
+   * @param {Node} node 
+   * @param {number} n 
+   * @returns nth generation of node 
+   */
+  static advance(node, n){
+    if(n == 0){
+      return node;
+    }
+
+    let bits = [];
+    while (n > 0) {
+        bits.push(n & 1);
+        n = n >> 1;
+        node = Node.centre(node); 
+    }
+
+    bits.reverse();
+    for (let k = 0; k < bits.length; k++) {
+        const bit = bits[k];
+        const j = bits.length - k - 1;
+        if (bit) {
+            node = Node.successor(node, j);
+        }
+    }
+
+    return node;
+  }
+
+  /**
+   * Fast generation of nth generation of node
+   * 
+   * @param {Node} node 
+   * @param {number} n 
+   * @returns nth generation of node
+   */
+  static fastForward(node, n){
+    for(let i = 0; i < n; i++){
+      while(node.#lvl < 3 |
+            node.#children[0].#numCells != node.#children[0].#children[3].#children[3].#numCells | 
+            node.#children[1].#numCells != node.#children[1].#children[2].#children[2].#numCells |
+            node.#children[2].#numCells != node.#children[2].#children[1].#children[1].#numCells |
+            node.#children[3].#numCells != node.#children[3].#children[0].#children[0].#numCells ){
+              node = Node.centre(node)
+      } 
+      node = Node.nextGeneration(node);
+    }
+    return node;
+  }
+
+  /**
+  * Turn a quadtree into a list of (x,y,gray) triples 
+  * in the rectangle (x,y) -> (clip[0], clip[1], clip[2], clip[3]) (if clip is not null).
+  * If `level` is given, quadtree elements at the given level are given 
+  * as a grayscale level 0.0->1.0, "zooming out" the display.
+  * 
+  * @param {Object} node - The root node of the quadtree.
+  * @param {number} [x=0] - The x-coordinate of the current node.
+  * @param {number} [y=0] - The y-coordinate of the current node.
+  * @param {number[]} [clip=null] - The clipping rectangle as [x_min, x_max, y_min, y_max].
+  * @param {number} [level=0] - The level at which to collect grayscale levels.
+  * @returns {Array} A list of (x, y, gray) triples within the clipping rectangle.
+  */
+  static expand(node, x = 0, y = 0, clip = null, lvl = 0){
+    if (node.#numCells === 0) {
+      return [];
+    }
+
+    const size = 1 << node.#lvl;
+
+    if (clip !== null) {
+      if (x + size < clip[0] || x > clip[1] || 
+          y + size < clip[2] || y > clip[3]) {
+          return [];
+      }
+    }
+
+    if (node.#lvl === lvl) {
+      const gray = node.#numCells / (size * size);
+      return [[x >> lvl, y >> lvl, gray]];
+    }
+    else{
+      const offset = size >> 1;
+        return [
+            ...expand(node.#children[0], x, y, clip, lvl),
+            ...expand(node.#children[1], x + offset, y, clip, lvl),
+            ...expand(node.#children[2], x, y + offset, clip, lvl),
+            ...expand(node.#children[3], x + offset, y + offset, clip, lvl)
+      ];
+    }
+  }
+
+  /**
+  * Turn a list of (x, y) coordinates into a quadtree.
+  * 
+  * @param {Array} pts - A list of (x, y) coordinate pairs.
+  * @returns {Object} The root node of the constructed quadtree.
+  */
+  static construct(pts){
+    let minX = Math.min(...pts.map(([x, y]) => x));
+    let minY = Math.min(...pts.map(([x, y]) => y));
+    let pattern = new Map(pts.map(([x, y]) => [[x - minX, y - minY], 'on']));
+    let k = 0;
+
+    while (pattern.size !== 1) {
+      let nextLevel = new Map();
+      let z = getZero(k);
+
+      while (pattern.size > 0) {
+          let [x, y] = pattern.keys().next().value;
+          x = x - (x & 1);
+          y = y - (y & 1);
+
+          let a = pattern.get([x, y]) || z;
+          pattern.delete([x, y]);
+          let b = pattern.get([x + 1, y]) || z;
+          pattern.delete([x + 1, y]);
+          let c = pattern.get([x, y + 1]) || z;
+          pattern.delete([x, y + 1]);
+          let d = pattern.get([x + 1, y + 1]) || z;
+          pattern.delete([x + 1, y + 1]);
+          
+          nextLevel.set([x >> 1, y >> 1], join(a, b, c, d));
+      }
+
+      pattern = nextLevel;
+      k += 1;
+    }
+
+    return Array.from(pattern.values())[0];
+  }
 }
 
 // Static basic node
 const ON = new Node(0, new Array(), 1, 1);
 const OFF = new Node(0, new Array(), 0, 0);
 
-
-export default {
-  Node,
-  ON, 
-  OFF
-}
+export default Node;
+export { ON, OFF };

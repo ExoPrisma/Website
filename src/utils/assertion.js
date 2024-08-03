@@ -31,7 +31,7 @@ function assertEqual(expectedValue, actualValue, message) {
   }
 }
 
-module.exports = {
-  assertCondition, 
-  assertEqual,
+export {
+  assertCondition,
+  assertEqual
 }
