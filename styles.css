@@ -1,15 +1,148 @@
+/* || COLOR SCHEME */
 :root {
   /* Light Color Scheme */
-  --c-background : #fff8eb;
+  /* --c-background : #fcfaf2;
+  --c-separator : #0C4767;
+  --c-font : black; */
 
   /* Dark Color Scheme */
   --c-background : #0C4767;
+  --c-separator : #ede2bf;
+  --c-font : white;
 
 }
 
+/* || FONT */
+.font {
+  color: var(--c-font);
+  font-family: "EB Garamond", serif;
+  font-optical-sizing: auto !important;
+  font-weight: 100 !important;
+  font-style: normal !important;
+}
+
+/* || GENERAL STYLE */
+body {
+  background-color: var(--c-background);
+  opacity: 1;
+  visibility: inherit;
+}
+
+h1 {
+  font-size: 2em;
+}
+
+h2 {
+  font-size: 1.5em;
+  font-weight: 400;
+}
+
+/* || CONTENT */
+.main-content {
+  position: fixed;
+}
+
+.content { 
+  display: flex;
+  flex-direction: column;
+}
+
+/* || HEADER */
 
 
+/* || INTRODUCTION */
+.section-intro {
+  width: 100%;
+  height: 100%;
+  padding-top: 10em;
+  padding-bottom: 8em;
+}
+
+.intro-container {
+  padding: 0% 6.25%;
+}
+
+.intro-heading-wrapper {
+  margin-bottom: 6em;
+}
+
+.intro-heading {
+  display: flex;
+  flex-direction: column;
+  letter-spacing: -.02em;
+  font-size: 5em;
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.hero{
+  display: flex;
+  gap: 15px;
+}
+
+.word {
+  padding-right: 5px;
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: appearFromBottom 1s forwards;
+}
+
+@keyframes appearFromBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.separator {
+  width: 100%;
+  height: 100%;
+}
+
+#svgGroup path {
+  fill: none;
+  stroke: var(--c-separator);
+  stroke-width: 0.25mm;
+  stroke-dasharray: 1000; 
+  stroke-dashoffset: 1000;
+  animation: draw 7s forwards; 
+  animation-delay: 3s;
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+    fill: var(--c-separator);
+  }
+}
+
+.intro-summary {
+  width: 35em;
+  min-width: 460px;
+  max-width: 100%;
+  display: inline-block;
+  overflow: hidden;
+}
+
+/* || HASHLIFE */
 /* Currently disabled, to be implemented in the future */
-.hashlife {
+/* .hashlife {
   display: none;
+} */
+
+/* || Selection */
+::selection {
+  background-color: var(--c-separator);
+  color : var(--c-background);
 }
+
+.separator::selection {
+  background-color: var(--c-background);
+  color: var(--c-separator);
+}
+

@@ -1,58 +1,130 @@
-// let canvas = document.querySelector('.field');
-// let ctx = canvas.getContext('2d');
-// canvas.width = window.innerWidth;
-// canvas.height = window.innerHeight;
+/** MAIN METHODS **/
+$(function() {
+    // Scroll to the top
+    $(window).on('beforeunload', function() {
+        $(window).scrollTop(0);
+    });
 
-// function draw() {
-//     let step = 10;
-//     let left = 0.5 - Math.ceil(canvas.width / step) * step;
-//     let top = 0.5 - Math.ceil(canvas.height / step) * step;
-//     let right = 2*canvas.width;
-//     let bottom = 2*canvas.height;
-//     ctx.clearRect(left, top, right - left, bottom - top);
-//     ctx.beginPath();
-//     for (let x = left; x < right; x += step) {
-//         ctx.moveTo(x, top);
-//         ctx.lineTo(x, bottom);
-//     }
-//     for (let y = top; y < bottom; y += step) {
-//         ctx.moveTo(left, y);
-//         ctx.lineTo(right, y);
-//     }
-//     ctx.strokeStyle = "#888";
-//     ctx.stroke();
-// }
+    animateIntro();
+});
 
+/** HELPER FUNCTIONS **/
 
-// // Mouse event handling:
-// let start;
-// const getPos = (e) => ({
-//     x: e.clientX - canvas.offsetLeft,
-//     y: e.clientY - canvas.offsetTop 
-// });
+/* || INTRO */
 
-// const reset = () => {
-//     start = null;
-//     ctx.setTransform(1, 0, 0, 1, 0, 0); // reset translation
-//     draw();
-// }
+// INTRO ANIMATION 
+function animateIntro() {
+    const $text = $(`.fade-in`);
+    let delay = 0.5;
 
-// canvas.addEventListener("mousedown", e => {
-//     reset();
-//     start = getPos(e)
-// });
+    $text.each(function() {
+        delay = bottomUpWordAnimation($(this), delay);
+    });
 
-// canvas.addEventListener("mouseup", reset);
-// canvas.addEventListener("mouseleave", reset);
+    const $summary = $(`.intro-summary`);
+    $summary.each(function() {
+        delay = bottomUpLineAnimation($(this), delay);
+    })
+}
 
-// canvas.addEventListener("mousemove", e => {
-//     // Only move the grid when we registered a mousedown event
-//     if (!start) return;
-//     let pos = getPos(e);
-//     // Move coordinate system in the same way as the cursor
-//     ctx.translate(pos.x - start.x, pos.y - start.y);
-//     draw();
-//     start = pos;
-// });
+/**
+ * Animates a word.
+ * 
+ * @param {*} $textDiv element to be animated 
+ * @param {*} delay the delay the current element
+ * @returns {num} number of seconds delayed for next element
+ */
+function bottomUpWordAnimation($textDiv, delay) {
+    const divContent = $textDiv.text();
+    $textDiv.empty();
 
-// draw(); // on page load
+    const words = divContent.split(" ");
+
+    words.forEach(function(word) {
+        if(!/^\s*$/.test(word)){
+
+            const $span = $('<span>', {
+                class: 'word',
+                text: `${word}` 
+            });
+
+            $span.css('animation-delay', `${delay}s`);
+
+            $textDiv.append($span);
+
+            delay += 0.3;
+        }
+    })
+
+    return delay;
+}
+
+/**
+ * Find lines of a text from a div containing text depending on size of div.
+ * 
+ * @param {jQuery} $container containing text
+ * @returns lines containing text
+ */
+function getLines($container) {
+    // Create invisible clone
+    const $clone = $container.clone()
+        .css({
+            "visibility" : "hidden",
+            "white-space" : "nowrap"
+        })
+        .appendTo($(".intro-container"));
+    const $text = $clone.find(".text").empty();
+
+    const text = $container.text();
+    const words = text.split(" ");
+    const lines = [];
+    let tempLine = "";
+    
+    words.forEach(function(word) {
+        if(!/^\s*$/.test(word)){
+            const testLine = tempLine + word + " ";
+            $text.text(`${testLine}`);
+        
+            if ($text.prop("scrollWidth") > $clone.prop("clientWidth")) {
+                lines.push(tempLine);
+                tempLine = word + " ";
+            } else {
+                tempLine = testLine;
+            }
+        }
+    });
+
+    $clone.remove();
+    
+    lines.push(tempLine);
+    return lines;
+}
+
+/**
+ * Animate a line. 
+ * 
+ * @param {jQuery} $textDiv element to be animated 
+ * @param {num} delay the delay the current element
+ * @returns number of seconds delayed for next element
+ */
+function bottomUpLineAnimation($textDiv, delay) {
+    const $summary = $textDiv.find(".text");
+    const lines = getLines($textDiv);
+    $summary.empty();
+
+    lines.forEach(function(line) {
+        const $span = $('<span>', {
+            class: 'word',
+            text: `${line}` 
+        });
+
+        $span.css('animation-delay', `${delay}s`);
+
+        $summary.append($span);
+
+        delay += 0.25;
+    });
+
+    return delay;
+}
+
