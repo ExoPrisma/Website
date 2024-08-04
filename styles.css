@@ -111,6 +111,7 @@ h2 {
   stroke-dasharray: 1000; 
   stroke-dashoffset: 1000;
   animation: draw 7s forwards; 
+  animation-delay: 3s;
 }
 
 @keyframes draw {
@@ -126,24 +127,6 @@ h2 {
   max-width: 100%;
   display: inline-block;
   overflow: hidden;
-}
-
-.summary {
-  display: inline-block;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: appearFromBottom 2s forwards;
-}
-
-@keyframes appearFromBottom {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 /* || HASHLIFE */
