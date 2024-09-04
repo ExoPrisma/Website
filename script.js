@@ -5,18 +5,88 @@ $(function() {
         $(window).scrollTop(0);
     });
 
+    animateHeader();
+
     animateIntro();
 });
 
 /** HELPER FUNCTIONS **/
 
+/* || HEADER */
+
+//HEADER ANIMATION
+/**
+ * Animate header, that is the button.
+ */
+function animateHeader() {
+    addColorThemeSwitch();
+    animateMenuButton();
+}
+
+/**
+ * Add color theme switch button to toggle between 2 color themes
+ */
+function addColorThemeSwitch() {
+    const $switch = $(".logo");
+
+    $switch.each(function() {
+        const $button = $(this);
+        $button.on("click", function() {
+            $button.css("display", "none");
+            const $sibling = $button.siblings();
+            const theme = $sibling.attr("class").split(" ")[1];
+            $sibling.css("display", "block");
+            $("body").attr("class", `${theme} font`);
+        });
+    });
+}
+
+/**
+ * Animate menu button to tranform from 3 bars to X.
+ */
+function animateMenuButton() {
+    const $menuBtn = $(".menu-btn");
+    const $menuContent = $(".dropdown-content");
+    let isShown = false;
+
+    function toggleMenu() {
+        isShown = !isShown;
+        $menuBtn.toggleClass("close", isShown);
+        if (isShown) {
+            $menuContent.slideDown(); 
+        } else {
+            $menuContent.slideUp(); 
+        }
+      }
+
+    $menuBtn
+        .on("click", toggleMenu)
+        .hover(
+            function() {
+                if (!isShown) {
+                    $menuBtn.addClass("close")
+                    $menuContent.slideDown(); 
+                }
+            }, 
+            function() {
+                if (!isShown) {
+                    $menuBtn.removeClass("close");
+                    $menuContent.slideUp(); 
+                }
+            }
+        );
+}
+
 /* || INTRO */
 
 // INTRO ANIMATION 
+/**
+ * Animate the intro which comprise the text and the ampersand. 
+ */
 function animateIntro() {
-    const $text = $(`.fade-in`);
     let delay = 0.5;
 
+    const $text = $(`.fade-in`);
     $text.each(function() {
         delay = bottomUpWordAnimation($(this), delay);
     });
