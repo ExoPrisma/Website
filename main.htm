@@ -8,13 +8,34 @@
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <title>Game of Life</title> 
+    <title>Shushi Michael Huang's Website</title> 
     
 </head>
 <body class="light font">
     <div id="page-wrapper">
         <div id="main-content" class="content-wrapper">
-            <header class="header"></header>
+            <header class="header">
+                <div class="header-container">
+                    <div class="logo-container">
+                        <img src="./assets/images/logo-light.PNG" alt="Brain logo" class="logo light">
+                        <img src="./assets/images/logo-dark.PNG" alt="Brain logo" class="logo dark" style="display: none;">
+                    </div>
+                    <div class="menu-container">
+                        <div class="menu">
+                            <div class="menu-btn">
+                                <div class="btn-line"></div>
+                                <div class="btn-line"></div>
+                                <div class="btn-line"></div>
+                            </div>
+                            <div class="dropdown-content" style="display: none;">
+                            <a href="#" class="dropdown-item">Porfolio</a>
+                            <a href="#" class="dropdown-item">Skills</a>
+                            <a href="#contact" class="dropdown-item">Contact</a>
+                            </div>
+                        </div>
+                      </div>
+                </div>
+            </header>
             <main class="content">
                 <section class="section-intro">
                     <div class="intro-container intro">
@@ -46,17 +67,31 @@
                     </div>
                 </section>
 
-                <section class="section-socials">
-                    <div class="socials-container">
-                        <div class="socials-link">
-                            <a href="" class="github"></a>
-                            <a href="" class="linkedIn"></a>
+                <section id="contact" class="section-socials">
+                    <div class="social-container">
+                        <div class="social-list">
+                            <a href="https://github.com/ExoPrisma" class="social github">
+                                <div class="social-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="75" height="75" viewBox="0 0 50 50">
+                                        <path d="M 25 2 C 12.309295 2 2 12.309295 2 25 C 2 37.690705 12.309295 48 25 48 C 37.690705 48 48 37.690705 48 25 C 48 12.309295 37.690705 2 25 2 z M 25 4 C 36.609824 4 46 13.390176 46 25 C 46 36.609824 36.609824 46 25 46 C 13.390176 46 4 36.609824 4 25 C 4 13.390176 13.390176 4 25 4 z M 16 12 C 14.35499 12 13 13.35499 13 15 C 13 16.64501 14.35499 18 16 18 C 17.64501 18 19 16.64501 19 15 C 19 13.35499 17.64501 12 16 12 z M 16 14 C 16.564129 14 17 14.435871 17 15 C 17 15.564129 16.564129 16 16 16 C 15.435871 16 15 15.564129 15 15 C 15 14.435871 15.435871 14 16 14 z M 14 19 A 1.0001 1.0001 0 0 0 13 20 L 13 35 A 1.0001 1.0001 0 0 0 14 36 L 18 36 A 1.0001 1.0001 0 0 0 19 35 L 19 20 A 1.0001 1.0001 0 0 0 18 19 L 14 19 z M 22 19 A 1.0001 1.0001 0 0 0 21 20 L 21 35 A 1.0001 1.0001 0 0 0 22 36 L 26 36 A 1.0001 1.0001 0 0 0 27 35 L 27 27.5 C 27 26.120455 28.120455 25 29.5 25 C 30.879545 25 32 26.120455 32 27.5 L 32 30 L 32 35 A 1.0001 1.0001 0 0 0 33 36 L 37 36 A 1.0001 1.0001 0 0 0 38 35 L 38 26.5 C 38 22.36961 34.63039 19 30.5 19 C 29.213528 19 28.059744 19.41615 27 19.990234 A 1.0001 1.0001 0 0 0 26 19 L 22 19 z M 15 21 L 17 21 L 17 34 L 15 34 L 15 21 z M 23 21 L 25 21 L 25 21.816406 A 1.0001 1.0001 0 0 0 26.693359 22.537109 C 27.684186 21.585305 29.016683 21 30.5 21 C 33.54961 21 36 23.45039 36 26.5 L 36 34 L 34 34 L 34 30 L 34 27.5 C 34 25.029545 31.970455 23 29.5 23 C 27.029545 23 25 25.029545 25 27.5 L 25 34 L 23 34 L 23 21 z"></path>
+                                    </svg>
+                                </div>
+                            </a>
+                            <a href="https://www.linkedin.com/in/shushi-michaël-huang-17773a270/" class="social linkedin">
+                                <div class="social-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="75" height="75" viewBox="0 0 48 48">
+                                        <path d="M 24 4 C 12.972066 4 4 12.972074 4 24 C 4 35.027926 12.972066 44 24 44 C 35.027934 44 44 35.027926 44 24 C 44 12.972074 35.027934 4 24 4 z M 24 7 C 33.406615 7 41 14.593391 41 24 C 41 31.66536 35.956939 38.122519 29 40.251953 L 29 35.136719 C 29 33.226635 27.899316 31.588619 26.308594 30.773438 A 10 8 0 0 0 32.4375 18.720703 C 32.881044 17.355414 33.376523 14.960672 32.199219 13.076172 C 29.929345 13.076172 28.464667 14.632086 27.765625 15.599609 A 10 8 0 0 0 24 15 A 10 8 0 0 0 20.230469 15.59375 C 19.529731 14.625773 18.066226 13.076172 15.800781 13.076172 C 14.449711 15.238817 15.28492 17.564557 15.732422 18.513672 A 10 8 0 0 0 21.681641 30.779297 C 20.3755 31.452483 19.397283 32.674042 19.097656 34.15625 L 17.783203 34.15625 C 16.486203 34.15625 15.98225 33.629234 15.28125 32.740234 C 14.58925 31.851234 13.845172 31.253859 12.951172 31.005859 C 12.469172 30.954859 12.144453 31.321484 12.564453 31.646484 C 13.983453 32.612484 14.081391 34.193516 14.650391 35.228516 C 15.168391 36.160516 16.229687 37 17.429688 37 L 19 37 L 19 40.251953 C 12.043061 38.122519 7 31.66536 7 24 C 7 14.593391 14.593385 7 24 7 z"></path>
+                                    </svg>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </section>
 
                 <section class="section-contact">
-                    <div class="contact-container"></div>
+                    <div class="contact-container">
+                        <a href="mailto:SMiHuang02084@gmail.com" class="btn-flip" data-front="Seeking an asset?" data-back="Here is my email!"></a>
+                    </div>
                 </section>
             </main>
         </div>
