@@ -36,8 +36,16 @@ h2 {
   font-weight: 400;
 }
 
+h5 {
+  color: var(--c-font);
+}
+
 a {
   text-decoration: none;
+}
+
+p {
+
 }
 
 /* || CONTENT */
@@ -48,6 +56,10 @@ a {
 .content { 
   display: flex;
   flex-direction: column;
+}
+
+.info {
+  height: 100vh;
 }
 
 /* || HEADER */
@@ -141,20 +153,21 @@ a {
 }
 
 .dropdown-item:nth-child(2) {
-  top: 4em;
+  top: 3em;
 }
 
 .dropdown-item:nth-child(3) {
-  top: 8em;
+  top: 6em;
   border-radius: 0px 0px 5px 5px;
 }
 
 /* || INTRODUCTION */
+
 .section-intro {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   padding-top: 6em;
-  padding-bottom: 4em;
+  padding-bottom: 12em;
 }
 
 .intro-heading-wrapper {
@@ -168,6 +181,7 @@ a {
   font-size: 5em;
   font-weight: 400;
   line-height: 1.1;
+  margin-top: 1em;
 }
 
 .hero{
@@ -216,6 +230,73 @@ a {
 /* .hashlife {
   display: none;
 } */
+
+/* || PORFOLIO */
+
+.porfolio-container {
+  margin-bottom: 5em;
+}
+
+#research-intern {
+  position: relative;
+  width: 100%;
+}
+
+#research-intern img {
+  width: 100%;
+  height: auto;
+}
+
+#research-intern .caption {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  color: var(--c-font);
+  padding: 20px;
+  z-index: 2;
+}
+
+#data-analysis {
+  position: relative;
+  width: 100%;
+}
+
+#data-analysis img {
+  width: 100%;
+  height: auto;
+}
+
+#data-analysis .caption {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  color: var(--c-font);
+  padding: 20px;
+  z-index: 2;
+}
+
+#data-structure {
+  position: relative;
+  width: 100%;
+}
+
+#data-structure img {
+  width: 100%;
+  height: auto;
+}
+
+#data-structure .caption {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  color: var(--c-font);
+  padding: 20px;
+  z-index: 2;
+}
+
+.carousel-indicators [data-bs-target] {
+  background-color: var(--c-font);
+}
 
 /* || SOCIAL */
 
