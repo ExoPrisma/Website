@@ -37,6 +37,12 @@ function addColorThemeSwitch() {
             const theme = $sibling.attr("class").split(" ")[1];
             $sibling.css("display", "block");
             $("body").attr("class", `${theme} font`);
+
+            const $porfolioImage = $(".carousel-item img");
+            $porfolioImage.each(function() {
+                const $img = $(this);
+                $img.hasClass(`${theme}`) ? $img.show() : $img.hide();
+            })
         });
     });
 }
