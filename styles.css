@@ -36,8 +36,8 @@ h2 {
   font-weight: 400;
 }
 
-h5 {
-  color: var(--c-font);
+h3 {
+  font-size: 4em;
 }
 
 a {
@@ -65,6 +65,7 @@ p {
 /* || HEADER */
 
 .header {
+  height: 20vh;
   padding-top: 2.5em;
 }
 
@@ -165,9 +166,8 @@ p {
 
 .section-intro {
   width: 100%;
-  height: 100vh;
-  padding-top: 6em;
-  padding-bottom: 12em;
+  height: 80vh;
+  padding-top: 3em;
 }
 
 .intro-heading-wrapper {
@@ -244,12 +244,13 @@ p {
 
 #research-intern img {
   width: 100%;
-  height: auto;
+  height: 90%;
 }
 
 #research-intern .caption {
+  width: 50%;
   position: absolute;
-  top: 50%;
+  top: 45%;
   right: 0;
   color: var(--c-font);
   padding: 20px;
@@ -267,8 +268,9 @@ p {
 }
 
 #data-analysis .caption {
+  width: 50%;
   position: absolute;
-  top: 50%;
+  top: 45%;
   left: 0;
   color: var(--c-font);
   padding: 20px;
@@ -286,8 +288,9 @@ p {
 }
 
 #data-structure .caption {
+  width: 50%;
   position: absolute;
-  top: 50%;
+  top: 45%;
   right: 0;
   color: var(--c-font);
   padding: 20px;
