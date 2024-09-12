@@ -6,8 +6,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="/styles.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="/script.js"></script>
     <title>Shushi Michael Huang's Website</title> 
     
 </head>
@@ -28,7 +31,7 @@
                                 <div class="btn-line"></div>
                             </div>
                             <div class="dropdown-content" style="display: none;">
-                            <a href="#" class="dropdown-item">Porfolio</a>
+                            <a href="#porfolio" class="dropdown-item">Porfolio</a>
                             <a href="#" class="dropdown-item">Skills</a>
                             <a href="#contact" class="dropdown-item">Contact</a>
                             </div>
@@ -36,6 +39,7 @@
                       </div>
                 </div>
             </header>
+          
             <main class="content">
                 <section class="section-intro">
                     <div class="intro-container intro">
@@ -60,14 +64,59 @@
                     </div>
                 </section>
 
-                <section id="hashlife" class="section-hashlife">
+                <section class="section-hashlife info" style="display: none;">
                     <div class="hashlife-container">
                         <!-- TBD -->
-                        <!-- Separate development -->
                         <canvas class="field"></canvas> 
                     </div>
                 </section>
 
+                <section id="porfolio" class="section-porfolio">
+                    <div class="porfolio-container">
+                        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-indicators">
+                              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                            </div>
+                            <div class="carousel-inner">
+                              <div id="research-intern" class="carousel-item active">
+                                <img src="./assets/images/porfolio-1-light.PNG" class="d-block w-100 light" alt="Porfolio 1 light">
+                                <img src="./assets/images/porfolio-1-dark.PNG" class="d-block w-100 dark" alt="Porfolio 1 dark" style="display: none !important;">
+                                <div class="caption">
+                                    <h3>Research Intern Project</h3>
+                                    <h4>Developed and integrated a dynamic front-end website with a robust Java backend, enhancing user interaction and data processing capabilities.</h4>
+                                </div>
+                              </div>
+                              <div id="data-analysis" class="carousel-item">
+                                <img src="./assets/images/porfolio-2-light.PNG" class="d-block w-100 light" alt="Porfolio 2 light">
+                                <img src="./assets/images/porfolio-2-dark.PNG" class="d-block w-100 dark" alt="Porfolio 2 dark" style="display: none !important;">
+                                <div class="caption">
+                                  <h3>Data Analysis Project</h3>
+                                  <h4>Conducted data analysis in a dermatology lab, using R to analyze patient data and generate insights for improving clinical outcomes.</h4>
+                                </div>
+                              </div>
+                              <div id="data-structure" class="carousel-item">
+                                <img src="./assets/images/porfolio-3-light.PNG" class="d-block w-100" alt="Porfolio 3 light">
+                                <img src="./assets/images/porfolio-3-dark.PNG" class="d-block w-100 dark" alt="Porfolio 3 dark" style="display: none !important;">
+                                <div class="caption">
+                                  <h3>Data Structure Project</h3>
+                                  <h4>Developed a Java library with custom implementations of fundamental data structures, optimizing performance and functionality for various computational tasks.</h4>
+                                </div>
+                              </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                              <!-- <span class="carousel-control-prev-icon" aria-hidden="true"></span> -->
+                              <!-- <span class="visually-hidden">Previous</span> -->
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                              <!-- <span class="carousel-control-next-icon" aria-hidden="true"></span> -->
+                              <!-- <span class="visually-hidden">Next</span> -->
+                            </button>
+                          </div>
+                    </div>
+                </section>
+          
                 <section id="contact" class="section-socials">
                     <div class="social-container">
                         <div class="social-list">
@@ -97,10 +146,5 @@
             </main>
         </div>
     </div>
-    <script>
-       
-    </script>
-    
-    <script src="script.js"></script>
 </body>
 </html>
